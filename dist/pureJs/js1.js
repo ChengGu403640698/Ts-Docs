@@ -13,9 +13,17 @@ class JS1 {
         console.log("print");
     }
 }
+class JS2 extends JS1 {
+    d = 4
+    constructor() {
+        super();
+    }
+}
 let js1obj = new JS1();
+let js2obj = new JS2();
 console.log(Object.keys(js1obj));
 for (let key in js1obj) {
     console.log(key);
 }
 console.log(Object.getOwnPropertyNames(js1obj));
+console.log(js2obj instanceof JS1, js1obj instanceof JS2)
