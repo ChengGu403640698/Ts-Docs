@@ -13,4 +13,5 @@ let a: ReadonlyInter = {
 
 // ReadonlyArray<number>
 const arrayA: ReadonlyArray<number> = [1, 2, 4];
+export {}
 

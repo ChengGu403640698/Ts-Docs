@@ -1,6 +1,6 @@
 // 函数
 // 函数的类型定义
-
+export {}
 import { couldStartTrivia } from "typescript";
 
 // 函数的重载

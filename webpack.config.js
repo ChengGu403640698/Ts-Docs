@@ -1,9 +1,11 @@
 const webpack = require('webpack');
 const { resolve } = require("path");
 const config = require('./config');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
-    entry: resolve(__dirname, "src/js/index.js"),
+    entry: resolve(__dirname, "src/index.tsx"),
     output: {
         filename: 'bundle.js',
         path: resolve(__dirname, 'dist'),
@@ -18,5 +20,44 @@ module.exports = {
         open: false,
         hot: true, // 热更新
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()],
+    module:{rules: [
+        {
+        test: /\.(html)$/,
+        loader: 'html-loader'
+        },
+        {
+        test: /\.(j|t)sx?$/,
+        include: resolve(__dirname, 'src'),
+        use: [
+            {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                '@babel/preset-react',  // jsx支持
+                ['@babel/preset-env', { useBuiltIns: 'usage', corejs: 2 }] // 按需使用polyfill
+                ],
+                plugins: [
+                ['@babel/plugin-proposal-class-properties', { 'loose': true }] // class中的箭头函数中的this指向组件
+                ],
+                cacheDirectory: true // 加快编译速度
+            }
+            },
+            {
+            loader: 'awesome-typescript-loader'
+            }
+        ]
+        }
+    ]},
+    resolve: {
+        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx'] // 自动判断后缀名，引入时可以不带后缀
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: resolve(__dirname, 'src/index.html'),
+            showErrors: true
+        })
+    ],
+    optimization: {}
 }

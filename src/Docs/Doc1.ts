@@ -15,3 +15,5 @@ const color: Color = 1;
 // <type> / ** as type
 let someValue: any = "this is a string";
 let strLength: number = (<string>someValue).length;
+
+export {}

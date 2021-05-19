@@ -1,3 +1,4 @@
+export {}
 // 枚举
 enum Color { RED = 1, GREEN, BLUE }
 // 枚举属性是不可修改的

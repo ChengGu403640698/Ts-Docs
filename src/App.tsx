@@ -1,9 +1,6 @@
-import * as React from 'react'
+import React from 'react'
 
-class App extends React.Component<any, any>{
-    render() {
-        return <div>App</div>
-    }
+const App:React.FC<{}> = ()=>{
+    return <div>App</div>
 }
-
 export default App;
