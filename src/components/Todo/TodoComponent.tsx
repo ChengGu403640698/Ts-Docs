@@ -7,55 +7,29 @@ import AddBtn from './icons/add.png'
 
 const DayLength: number = 60 * 24 * 60 * 1000;
 
-export interface TodoStates {
+interface TodoComponentProps {
+    freshTasksList: (item: Task) => void,
     TasksList: Task[];
-    FinishedList: Task[];
+}
+interface TodoStates {
+    TasksList: Task[];
     currentTime: number;
 }
 
-// produce test data
-function produceData(): Task[] {
-
-    let TestData: Task[] = [];
-    const person1: PersonInfo = {
-        Name: "顾承（我）",
-        Id: "00001",
-    }
-    TestData.push(new RealTask({
-        Title: "Task1",
-        Person: person1,
-        ExpireTime: new Date(Date.now() + DayLength),
-    }))
-    TestData.push(new RealTask({
-        Title: "Task2",
-        Person: person1,
-        ExpireTime: new Date(Date.now() + 2 * DayLength),
-        Memo: "Must do it",
-    }))
-    TestData.push(new RealTask({
-        Title: "Task3",
-        Person: person1,
-        ExpireTime: new Date(Date.now() + 10 * DayLength),
-        Memo: "Must do it",
-    }))
-    return TestData;
-}
-
-
-class TodoComponent extends React.Component<anyobj, TodoStates> {
+class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
 
     timer: TimerType | null = null;
     state: TodoStates = {
         TasksList: [],
         currentTime: Date.now(),
-        FinishedList: [],
     }
 
     componentDidMount() {
         this.setState({
-            TasksList: produceData()
-        }, () => { console.dir(this.state.TasksList) })
-
+            TasksList: this.props.TasksList.filter((item) => {
+                return !item.ifFinished;
+            })
+        })
         this.timer = setInterval(() => {
             this.setState({
                 currentTime: Date.now()
@@ -88,17 +62,8 @@ class TodoComponent extends React.Component<anyobj, TodoStates> {
             return item.ExpireTime.getTime() > (currentTime + 7 * DayLength);
         })
     }
-
-    handleItemFinished(target: Task) {
-        let { TasksList, FinishedList } = this.state;
-        TasksList = TasksList.filter((item: Task) => {
-            return item != target;
-        })
-        FinishedList.push(target);
-        this.setState({
-            TasksList,
-            FinishedList
-        })
+    freshTasksList(item: Task): void {
+        this.props.freshTasksList(item);
     }
 
     render() {
@@ -106,17 +71,17 @@ class TodoComponent extends React.Component<anyobj, TodoStates> {
             <TodoItemList
                 description={"已逾期"}
                 list={this.getExpireTasks()}
-                handleItemFinished={this.handleItemFinished.bind(this)}
+                freshTasksList={this.freshTasksList.bind(this)}
             />
             <TodoItemList
                 description={"未来七天"}
                 list={this.getIn7DaysTasks()}
-                handleItemFinished={this.handleItemFinished.bind(this)}
+                freshTasksList={this.freshTasksList.bind(this)}
             />
             <TodoItemList
                 description={"以后"}
                 list={this.getFutureComingTask()}
-                handleItemFinished={this.handleItemFinished.bind(this)}
+                freshTasksList={this.freshTasksList.bind(this)}
             />
             <div className="inline-center">
                 <Link to="/VisitFinished" >

@@ -7,9 +7,9 @@ const normalBlue = "rgb(98, 151, 204)";
 const backgroundColor = "white";
 
 interface TodoItemProps {
+    freshTasksList?: (item: Task) => void;
     description: TodoItemStatusType,
     item: Task;
-    itemFinished: (item: Task) => void
 }
 
 export default class TodoItem extends React.Component<TodoItemProps, {}> {
@@ -19,7 +19,7 @@ export default class TodoItem extends React.Component<TodoItemProps, {}> {
     }
 
     handleBtnClickItemFinished(): void {
-        this.props.itemFinished(this.props.item);
+        this.props.freshTasksList!(this.props.item);
     }
 
     calculateDateText(): string {
@@ -33,11 +33,9 @@ export default class TodoItem extends React.Component<TodoItemProps, {}> {
     }
 
     calculateTextColor(): string {
-        const expireTime = this.props.item.ExpireTime;
         if (this.props.description == "已逾期") return alertTextColor;
         return normalTextColor;
     }
-
     render() {
         return (<div className="todo-item relatce-position">
             <span style={
@@ -71,7 +69,8 @@ export default class TodoItem extends React.Component<TodoItemProps, {}> {
                 {this.calculateDateText()}
             </span><br />
             <button
-                className="button-style absolute-position"
+                disabled={this.props.item.ifFinished}
+                className={`${this.props.item.ifFinished ? 'button-styleok' : 'button-style'} absolute-position`}
                 style={
                     {
                         right: "10px",

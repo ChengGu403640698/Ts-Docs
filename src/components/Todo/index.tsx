@@ -1,6 +1,6 @@
 import TodoComponent from './TodoComponent'
-import UnderTodo from './UnderTodo'
+import FinishedTodo from './FinishedTodo'
 export {
     TodoComponent,
-    UnderTodo
+    FinishedTodo
 }

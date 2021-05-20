@@ -9,6 +9,7 @@ export interface Task {
     Title: string,
     Person: PersonInfo,
     ExpireTime: Date,
+    ifFinished?: boolean,
     Memo?: string,
     AttachedFiles?: Array<File>;
     OtherParticipants?: Array<string>;
@@ -17,10 +18,12 @@ export class RealTask {
     Title: string
     Person: PersonInfo
     ExpireTime: Date
+    ifFinished?: boolean
     Memo?: string
     AttachedFiles?: Array<File>
     OtherParticipants?: Array<string>
     constructor(param: Task) {
+        this.ifFinished = false;
         this.Title = param.Title;
         this.Person = param.Person;
         this.ExpireTime = param.ExpireTime;

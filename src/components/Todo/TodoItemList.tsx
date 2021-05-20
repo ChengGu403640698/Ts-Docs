@@ -6,9 +6,9 @@ import downIcon from "./icons/down.png";
 import "./styles/style.less"
 
 interface TodoItemListProps {
+    freshTasksList: (item: Task) => void
     description: TodoItemStatusType,
     list: Task[],
-    handleItemFinished: (item: Task) => void
 }
 
 
@@ -21,14 +21,15 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
     }
 
     handleItemFinished(item: Task) {
-        this.props.handleItemFinished(item)
     }
 
     handleClickHide() {
         this.Icon = this.Icon == downIcon ? rightIcon : downIcon;
         this.ifshowList = !this.ifshowList;
     }
-
+    freshTasksList(item: Task): void {
+        this.props.freshTasksList(item);
+    }
     render() {
         return (<>
             <div onClick={this.handleClickHide.bind(this)}>
@@ -43,7 +44,7 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
                             description={this.props.description}
                             key={item.Title}
                             item={item}
-                            itemFinished={this.handleItemFinished.bind(this)}
+                            freshTasksList={this.freshTasksList.bind(this)}
                         />
                     })
                 }
