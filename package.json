@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "webpack serve --open --host 10.192.47.104",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -14,10 +14,16 @@
     "@types/antd": "^1.0.0",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
+    "@types/react-router": "^5.1.14",
+    "@types/react-router-dom": "^5.1.7",
     "antd": "^4.15.6",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
+    "less": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "typescript": "^4.2.4"
   },
   "devDependencies": {
@@ -28,8 +34,11 @@
     "@babel/preset-react": "^7.13.13",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
+    "less-loader": "^9.0.0",
+    "style-loader": "^2.0.0",
     "webpack": "^5.37.0",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
