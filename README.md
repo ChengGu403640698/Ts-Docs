@@ -22,6 +22,7 @@ add {
     npm install less -S ->
   
 2. 创建合适的工程目录结构
+```javascript
 -- root
     -- dist
     -- src
@@ -31,7 +32,9 @@ add {
     -- webpack.config.js
     -- tsconfig.json
     -- config.js // 这里一般放一些通用配置
+```
 3. 首先添加ts配置--tsconfig.json
+```javascript
 {
   "compilerOptions": {
     "rootDir": "./src",
@@ -60,7 +63,9 @@ add {
     "src"
   ]
 }
+```
 4. 写config.js+webpack.config.js配置
+```javascript
 // config.js
 
 const SERVER_PORT = 1022
@@ -72,7 +77,7 @@ module.exports = {
     SERVER_PORT,
     SERVER_HOST
 }
-----------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------
 // webpack.config.js
 
 const webpack = require('webpack');
@@ -169,8 +174,11 @@ module.exports = {
     ],
     optimization: {}
 }
+```
 6. package.json
+```javascript
 "script":{
     "start" : "webpack serve --open",
     "build": "webpack --mode production"
 }
+```
