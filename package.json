@@ -1,10 +1,10 @@
 {
-  "name": "typescriptDoc",
+  "name": "typescriptDocs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open --host 10.192.47.104",
+    "start": "webpack serve --open --host 192.168.1.44",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/antd": "^1.0.0",
+    "@types/query-string": "^6.3.0",
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
     "@types/react-router": "^5.1.14",
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "less": "^4.1.1",
+    "query-string": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^5.2.0",

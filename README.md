@@ -14,12 +14,13 @@ add {
     npm install -D html-loader  -> # 配置loader
     npm install -D awesome-typescript-loader -> 配置typescript-loader
     npm install -D style-loader css-loader less-loader -> #样式loader
+    npm install less -S ->
     npm install -D file-loader -> # 图片loader
     npm install -D babel-loader @babel/core @babel/plugin-proposal-class-properties @babel/polyfill @babel/ preset-env @babel/preset-react -> # 配置babel
     npm install -D html-webpack-plugin -> # html插件
     npm install -S typescript react react-dom @types/react @types/react-dom -> #react+ts工程所需的包
     npm install @types/react-router-dom react-router-dom -> #react-router
-    npm install less -S ->
+    npm install -S query-string @types/query-string ->
   
 2. 创建合适的工程目录结构
 ```javascript

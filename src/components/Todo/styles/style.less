@@ -7,11 +7,15 @@
 a{
     text-decoration: none;
 }
-.todo-item{
+.todo-content-box{
+    *{
+        background-color:white;
+    }
     padding: 10px;
     border-radius: 10px;
     background-color:white;
     margin: 5px;
+    height: 100px;
 }
 .icon{
     height: 10px;
@@ -26,7 +30,7 @@ a{
 .show{
     display: block;
 }
-.relatce-position{
+.relative-position{
     position: relative;
 }
 .absolute-position{
@@ -50,4 +54,29 @@ a{
     position: absolute;
     bottom: 40px;
     right: 40px;
+}
+
+.edit-block{
+    background-color: white;
+    padding: 0px 10px 40px 20px;
+    h1{
+        font-size: 25px;
+    }
+    * {
+        background-color: white;
+    }
+    .item{
+        padding: 20px;
+        height: 30px;
+        border-bottom: rgba(137,124,136,0.1) solid 1px;
+    }
+    input{
+        border: none;
+    }
+    img{
+        width: 20px;
+        height: 20px;
+        padding-right: 20px;
+        padding-bottom: -10px;
+    }
 }

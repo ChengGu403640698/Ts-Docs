@@ -1,11 +1,11 @@
 import React from 'react'
 import TodoItemList from './TodoItemList'
-import { anyobj, Task, TimerType, RealTask, PersonInfo } from './types'
+import {  Task, TimerType } from './types'
+import { DayLength } from './global'
 import './styles/style.less'
 import { Link } from 'react-router-dom'
 import AddBtn from './icons/add.png'
 
-const DayLength: number = 60 * 24 * 60 * 1000;
 
 interface TodoComponentProps {
     freshTasksList: (item: Task) => void,
@@ -34,7 +34,8 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
             this.setState({
                 currentTime: Date.now()
             })
-        }, 1000);
+        }, 1);
+        // 很奇怪这个数字一大就展开很慢，不知道为啥
     }
 
     componentWillUnmount() {

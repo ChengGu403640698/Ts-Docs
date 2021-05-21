@@ -1,5 +1,7 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Task, DayDict, TodoItemStatusType } from './types'
+import qs from 'query-string'
 import './styles/style.less'
 const alertTextColor = "rgb(213,122,107)";
 const normalTextColor = "rgb(109,121,123)"
@@ -37,48 +39,51 @@ export default class TodoItem extends React.Component<TodoItemProps, {}> {
         return normalTextColor;
     }
     render() {
-        return (<div className="todo-item relatce-position">
-            <span style={
-                {
-                    color: normalBlue,
-                    backgroundColor,
-                }
-            }>
-                {this.props.item.Person.Name}
-            </span>
-            <br />
-            <span
-                style={
-                    {
-                        color: normalTextColor,
-                        backgroundColor,
-                    }}
-            >
-                {this.props.item.Title}
-            </span><br />
-            <span
-                className="absolute-position"
-                style={
-                    {
-                        color: this.calculateTextColor(),
-                        backgroundColor,
-                        right: "10px",
-                        top: "5px",
-                    }}
-            >
-                {this.calculateDateText()}
-            </span><br />
+        return (
+        <div className = "relative-position todo-content-box">
+            <Link  to={`/editItem?${qs.stringify(this.props.item)}`}>
+                <div style = {{height:"80px"}}>
+                <span 
+                    style={
+                        {
+                            color: normalBlue
+                        }
+                    }
+                >
+                    {this.props.item.Person.Name}
+                </span>
+                <span
+                    style={
+                        {
+                            color: normalTextColor
+                        }}
+                >
+                    {this.props.item.Title}
+                </span>
+                <span
+                        className="absolute-position"
+                        style={
+                            {
+                                color: this.calculateTextColor(),
+                                right: "10px",
+                                top: "5px",
+                            }}
+                    >
+                        {this.calculateDateText()}
+                    </span>
+                </div>
+            </Link>
             <button
                 disabled={this.props.item.ifFinished}
                 className={`${this.props.item.ifFinished ? 'button-styleok' : 'button-style'} absolute-position`}
                 style={
                     {
                         right: "10px",
-                        bottom: "5px",
+                        bottom: "10px",
                     }}
-                onClick={this.handleBtnClickItemFinished.bind(this)}>
-                完成
-                </button>
-        </div >)
+                onClick={this.handleBtnClickItemFinished.bind(this)}>完成
+            </button>
+        </div>
+        )
     }
 }

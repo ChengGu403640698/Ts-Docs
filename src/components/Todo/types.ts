@@ -39,3 +39,5 @@ export enum DayDict {
     "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"
 }
 export type TodoItemStatusType = "已逾期" | "未来七天" | "以后" | "已完成";
+
+export const DayLength: number = 60 * 24 * 60 * 1000;
