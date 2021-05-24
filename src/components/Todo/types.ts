@@ -4,7 +4,7 @@ export interface PersonInfo {
     Id: string,
     [props: string]: any,
 }
-
+export type EmergyLeval = 'Low' | "Normal" | "Urgent" | 'ExtremeUrgent';
 export interface Task {
     Title: string,
     Person: PersonInfo,
@@ -13,23 +13,25 @@ export interface Task {
     Memo?: string,
     AttachedFiles?: Array<File>;
     OtherParticipants?: Array<string>;
+    EmergyLeval?: EmergyLeval;
 }
 export class RealTask {
-    Title: string
+    Title: string = "";
     Person: PersonInfo
     ExpireTime: Date
-    ifFinished?: boolean
-    Memo?: string
-    AttachedFiles?: Array<File>
-    OtherParticipants?: Array<string>
+    ifFinished: boolean = false;
+    Memo: string = ""
+    AttachedFiles: Array<File> = []
+    OtherParticipants: Array<string> = []
+    EmergyLeval: EmergyLeval = "Low"
     constructor(param: Task) {
-        this.ifFinished = false;
         this.Title = param.Title;
         this.Person = param.Person;
         this.ExpireTime = param.ExpireTime;
-        this.Memo = param.Memo;
-        this.AttachedFiles = param.AttachedFiles;
-        this.OtherParticipants = param.OtherParticipants;
+        this.Memo = param.Memo ? param.Memo : this.Memo;
+        this.AttachedFiles = param.AttachedFiles ? [...param.AttachedFiles] : this.AttachedFiles;
+        this.OtherParticipants = param.OtherParticipants ? [...param.OtherParticipants] : this.OtherParticipants;
+        this.EmergyLeval = param.EmergyLeval ? param.EmergyLeval : this.EmergyLeval;
     }
 }
 

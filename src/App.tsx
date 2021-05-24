@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import { Task } from './components/Todo/types'
-import {produceData} from './components/Todo/global'
+import { produceData } from './components/Todo/global'
 import { TodoComponent as Todo, FinishedTodo, EditTodoItem } from './components/Todo'
 
 const App: React.FC<{}> = () => {
@@ -25,7 +25,7 @@ const App: React.FC<{}> = () => {
     }
 
     return (
-        
+
         <Router>
             <Route
                 path="/"
@@ -38,7 +38,15 @@ const App: React.FC<{}> = () => {
             </Route>
             <Route
                 path="/editItem"
-                render={() => <EditTodoItem TasksList={data}/>}>
+                render={() => <EditTodoItem TasksList={data}
+                    handleRefreshTasksList={
+                        (index: number, item: Task) => {
+                            if (index == -1) return;
+                            const newData = [...data];
+                            newData[index] = item;
+                            setData(newData);
+                            console.dir(data);
+                        }} />}>
             </Route>
         </Router >
 

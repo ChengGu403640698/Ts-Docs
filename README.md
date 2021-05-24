@@ -183,3 +183,54 @@ module.exports = {
     "build": "webpack --mode production"
 }
 ```
+
+
+<!-- --------------------------------------------------------------------- -->
+遇到的问题总结：
+
+1.
+ERROR in ./...tsx
+Module not found: Error: 
+Can't resolve './**' in '**'
+
+解决 webpack.config.js需要配置 resolve
+
+resolve:{
+    extensions:['.ts','.tsx','.js','.jsx']
+}
+2. 
+WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets:
+  bundle.js (1020 KiB)
+
+WARNING in entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (1020 KiB)
+      bundle.js
+
+
+WARNING in webpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/
+
+暂未解决
+
+3. Cannot find module ‘./**.png‘ or its corresponding type declarations.ts
+
+在任意目录下新建 .d.ts文件进行图片声明
+
+declare module '*.svg'
+declare module '*.png'
+declare module '*.jpg'
+declare module '*.jpeg'
+declare module '*.gif'
+declare module '*.bmp'
+declare module '*.tiff'
+
+修改tsconfig.json文件，添加inclue
+  example:
+  "include": [
+    "src/",
+    "src/.d.ts"
+  ]
