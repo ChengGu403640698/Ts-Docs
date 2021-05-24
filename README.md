@@ -198,6 +198,7 @@ Can't resolve './**' in '**'
 resolve:{
     extensions:['.ts','.tsx','.js','.jsx']
 }
+<br/>
 2. 
 WARNING in asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
 This can impact web performance.
