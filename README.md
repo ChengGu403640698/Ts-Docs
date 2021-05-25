@@ -236,7 +236,7 @@ declare module '*.tiff'
     "src/",
     "src/.d.ts"
   ]
-<<<<<<< HEAD
+<br/>
 4. antd中引入的模块缺少样式
 方案一 
 可以使用插件引入
@@ -258,11 +258,10 @@ import "antd/dist/antd.css"
     test: /\.css$/i,
     use: ["style-loader", "css-loader"],
 },
+<br/>
 5. 暂时尚未解决antd全局样式覆盖的问题，样式文件相互冲突
- 
+ <br/>
 6. 实现表单提交功能暂时有问题
 需求：点击按钮完成项目的添加，跳转回首页
 如果使用Link标签的话，如果button验证内容失败还是会跳转，不合理
 暂时使用获取Link id的方式来决定是否要最终跳转
-=======
->>>>>>> c1d6909bb787a2bf126bd3015c1d80ed27807442
