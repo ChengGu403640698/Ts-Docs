@@ -31,7 +31,7 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
         this.props.freshTasksList(item);
     }
     render() {
-        return (<>
+        return (<div className="todo-item-list">
             <div onClick={this.handleClickHide.bind(this)}>
                 <img className="icon" src={this.Icon} alt="down" />
                 <b>{this.props.description}</b>
@@ -49,7 +49,7 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
                     })
                 }
             </div>
-        </>)
+        </div>)
     }
 }
 //注意渲染列表中此时的key不是很合适

@@ -1,8 +1,13 @@
 *{
     font-family: 'Times New Roman', Times, serif;
     font-size: 15px;
-    background-color: rgb(240,240,235);
+    // 
+}
+div.todo-item-list {
     margin-top:15px;
+}
+body{
+    background-color: rgb(240,240,235) !important;
 }
 a{
     text-decoration: none;
@@ -19,9 +24,17 @@ a{
     height: 100px;
 }
 .icon{
-    height: 10px;
-    width: 10px;
+    height: 20px;
+    width: 20px;
+    padding-right: 10px;
 }
+img{
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: none;
+    box-sizing: content-box;
+}
+
 .inline-center{
     text-align:center;
 }
@@ -80,4 +93,20 @@ a{
         padding-right: 20px;
         padding-bottom: -10px;
     }
+}
+.textarea{
+    font-size: 25px;
+    border: none;
+    width: 100%;
+}
+.bar-area{
+    *{
+        background-color: white;
+        border: none;
+    }
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

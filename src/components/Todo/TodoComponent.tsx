@@ -1,6 +1,6 @@
 import React from 'react'
 import TodoItemList from './TodoItemList'
-import {  Task, TimerType } from './types'
+import { Task, TimerType } from './types'
 import { DayLength } from './global'
 import './styles/style.less'
 import { Link } from 'react-router-dom'
@@ -89,7 +89,7 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
                     {"已处理的待办 >"}
                 </Link>
             </div>
-            <Link to="/VisitFinished">
+            <Link to="/addItem">
                 <img className="add-btnicon" src={AddBtn} alt="Add TodoItem" />
             </Link>
 

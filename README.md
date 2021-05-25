@@ -183,7 +183,8 @@ module.exports = {
     "build": "webpack --mode production"
 }
 ```
-
+<!-- --------------------------------------------------------------------- -->
+完整的需求分析和方案设计思路
 
 <!-- --------------------------------------------------------------------- -->
 遇到的问题总结：
@@ -234,3 +235,30 @@ declare module '*.tiff'
     "src/",
     "src/.d.ts"
   ]
+4. antd中引入的模块缺少样式
+方案一 
+可以使用插件引入
+npm install -S babel-plugin-import
+
+// webpack.config.js--添加
+plugins: [
+    ['@babel/plugin-proposal-class-properties', { 'loose': true }], // class中的箭头函数中的this指向组件
+    ['import', {
+        libraryName: 'antd',
+        style: 'css',
+    }]
+],
+方案二
+全局直接引入css文件
+import "antd/dist/antd.css"
+
+{
+    test: /\.css$/i,
+    use: ["style-loader", "css-loader"],
+},
+5. 暂时尚未解决antd全局样式覆盖的问题，样式文件相互冲突
+ 
+6. 实现表单提交功能暂时有问题
+需求：点击按钮完成项目的添加，跳转回首页
+如果使用Link标签的话，如果button验证内容失败还是会跳转，不合理
+暂时使用获取Link id的方式来决定是否要最终跳转

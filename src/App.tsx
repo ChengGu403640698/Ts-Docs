@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { Task } from './components/Todo/types'
-import { produceData } from './components/Todo/global'
-import { TodoComponent as Todo, FinishedTodo, EditTodoItem } from './components/Todo'
+import { person, produceData } from './components/Todo/global'
+import { TodoComponent as Todo, FinishedTodo, EditTodoItem, AddTodoItem } from './components/Todo'
 
 const App: React.FC<{}> = () => {
 
@@ -25,7 +25,6 @@ const App: React.FC<{}> = () => {
     }
 
     return (
-
         <Router>
             <Route
                 path="/"
@@ -45,8 +44,15 @@ const App: React.FC<{}> = () => {
                             const newData = [...data];
                             newData[index] = item;
                             setData(newData);
-                            console.dir(data);
                         }} />}>
+            </Route>
+            <Route
+                path="/addItem"
+                render={() => <AddTodoItem person={person} handleAddItem={(item: Task) => {
+                    const newData = [...data];
+                    newData.push(item);
+                    setData(newData);
+                }} />}>
             </Route>
         </Router >
 

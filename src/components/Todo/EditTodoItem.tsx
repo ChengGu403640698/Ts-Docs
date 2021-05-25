@@ -1,6 +1,6 @@
 import React from 'react'
 import qs from 'query-string'
-import { Link } from 'react-router-dom'
+import Header from './Header'
 import { Task, EmergyLeval } from './types'
 import './styles/style.less'
 import personIcon from './icons/person.png'
@@ -8,7 +8,6 @@ import priorityIcon from './icons/priority-high.png'
 import participantIcon from './icons/participants.png'
 import memoIcon from './icons/memo.png'
 import clockIcon from './icons/clock.png'
-import back from './icons/back.png'
 
 interface EditTodoItemProps {
     TasksList: Task[];
@@ -42,7 +41,7 @@ class EditTodoItem extends React.Component<EditTodoItemProps, EditTodoItemState>
     render() {
         return this.state &&
             (<>
-                <Link to="/"><img src={back} className="icon" alt="back" /> Back</Link>
+                <Header targetPath="/" title="编辑待办" ></Header>
                 <div className="edit-block">
                     <div className="item">
                         <h1><input type="checkbox"
