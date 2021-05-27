@@ -1,11 +1,11 @@
 import TodoComponent from './TodoComponent'
-import FinishedTodo from './FinishedTodo'
+import FinishedItemList from './FinishedItemList'
 import EditTodoItem from './EditTodoItem'
 import AddTodoItem from './AddTodoItem'
 import Header from './Header'
 export {
     TodoComponent,
-    FinishedTodo,
+    FinishedItemList,
     EditTodoItem,
     AddTodoItem,
     Header

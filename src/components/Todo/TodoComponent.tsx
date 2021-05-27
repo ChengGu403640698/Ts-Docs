@@ -1,3 +1,11 @@
+// TodoComponent -- 页面组件 -- '/'
+
+// 页面结构:
+// HEADER--组件: 待办
+// TodoItemList--组件: >已逾期
+// TodoItemList--组件: >未来七天
+// TodoItemList--组件: >以后
+
 import React from 'react'
 import TodoItemList from './TodoItemList'
 import { Task, TimerType } from './types'
@@ -5,7 +13,7 @@ import { DayLength } from './global'
 import './styles/style.less'
 import { Link } from 'react-router-dom'
 import AddBtn from './icons/add.png'
-
+import Header from './Header'
 
 interface TodoComponentProps {
     freshTasksList: (item: Task) => void,
@@ -26,6 +34,9 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
 
     componentDidMount() {
         this.setState({
+            currentTime: Date.now()
+        })
+        this.setState({
             TasksList: this.props.TasksList.filter((item) => {
                 return !item.ifFinished;
             })
@@ -34,8 +45,7 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
             this.setState({
                 currentTime: Date.now()
             })
-        }, 1);
-        // 很奇怪这个数字一大就展开很慢，不知道为啥
+        }, 1000);
     }
 
     componentWillUnmount() {
@@ -49,6 +59,7 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
         })
     }
 
+    
     private getIn7DaysTasks(): Task[] {
         const currentTime = this.state.currentTime;
         return this.state.TasksList.filter((item) => {
@@ -63,12 +74,14 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
             return item.ExpireTime.getTime() > (currentTime + 7 * DayLength);
         })
     }
+
     freshTasksList(item: Task): void {
         this.props.freshTasksList(item);
     }
 
     render() {
         return (<>
+            <Header targetPath="/" title="待办" ></Header>
             <TodoItemList
                 description={"已逾期"}
                 list={this.getExpireTasks()}

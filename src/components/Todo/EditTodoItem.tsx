@@ -1,3 +1,9 @@
+// FinishedItemList -- 页面组件 -- '/editItem'
+
+// 页面结构:
+// HEADER--组件: 已处理的
+// Edit的内容
+
 import React from 'react'
 import qs from 'query-string'
 import Header from './Header'
@@ -8,6 +14,7 @@ import priorityIcon from './icons/priority-high.png'
 import participantIcon from './icons/participants.png'
 import memoIcon from './icons/memo.png'
 import clockIcon from './icons/clock.png'
+import './styles/style.less'
 
 interface EditTodoItemProps {
     TasksList: Task[];
@@ -57,15 +64,39 @@ class EditTodoItem extends React.Component<EditTodoItemProps, EditTodoItemState>
                         />{this.state.Title}</h1>
                     </div>
                     <div className="item">
-                        <img src={personIcon} alt="personIcon" />
+                        <img 
+                        src={personIcon} 
+                        alt="personIcon" 
+                        className="icon"
+                        style={
+                            {
+                                boxSizing:"content-box"
+                            }
+                        }/>
                         执行人: <input type="text" value={this.state.Person.Name} />
                     </div>
                     <div className="item">
-                        <img src={clockIcon} alt="clockIcon" />
+                        <img 
+                        src={clockIcon} 
+                        alt="clockIcon" 
+                        className="icon"
+                        style={
+                            {
+                                boxSizing:"content-box"
+                            }
+                        }/>
                         {this.state.ExpireTime.toLocaleDateString() + "截止"}
                     </div>
                     <div className="item">
-                        <img src={memoIcon} alt="memoIcon" />备注:
+                        <img 
+                        src={memoIcon} 
+                        alt="memoIcon" 
+                        className="icon"
+                        style={
+                            {
+                                boxSizing:"content-box"
+                            }
+                        }/>备注:
                         <input type="text"
                             value={this.state.Memo}
                             placeholder="点此添加备注"
@@ -76,7 +107,15 @@ class EditTodoItem extends React.Component<EditTodoItemProps, EditTodoItemState>
                             }} />
                     </div>
                     <div className="item">
-                        <img src={priorityIcon} alt="priorityIcon" />
+                        <img 
+                        src={priorityIcon} 
+                        alt="priorityIcon" 
+                        className="icon"
+                        style={
+                            {
+                                boxSizing:"content-box"
+                            }
+                        }/>
                         <select
                             name={"priority"}
                             value={this.state.EmergyLeval}
@@ -92,7 +131,16 @@ class EditTodoItem extends React.Component<EditTodoItemProps, EditTodoItemState>
                         </select>
                     </div>
                     <div className="item">
-                        <img src={participantIcon} alt="participantIcon" />参与人:<span>{this.state.Person.Name}</span>
+                        <img 
+                        src={participantIcon} 
+                        alt="participantIcon" 
+                        className="icon"
+                        style={
+                            {
+                                boxSizing:"content-box"
+                            }
+                        }/>
+                        参与人:<span>{this.state.Person.Name}</span>
                     </div>
 
                 </div>
