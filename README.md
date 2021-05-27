@@ -265,3 +265,5 @@ import "antd/dist/antd.css"
 需求：点击按钮完成项目的添加，跳转回首页
 如果使用Link标签的话，如果button验证内容失败还是会跳转，不合理
 暂时使用获取Link id的方式来决定是否要最终跳转
+
+7. 有的时候挂了vpn使用git管理远程仓库的时候需要 git config --global --unset-all https.proxy

@@ -1,3 +1,8 @@
+// TodoItem -- 元素组件 -- TodoItemList和FinishedItemList的一部分
+// 结构如下：
+// 标题: "已逾期"| "未来七天"| "以后"
+// TodoItem 列表
+
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { Task, DayDict, TodoItemStatusType } from './types'
@@ -6,7 +11,6 @@ import './styles/style.less'
 const alertTextColor = "rgb(213,122,107)";
 const normalTextColor = "rgb(109,121,123)"
 const normalBlue = "rgb(98, 151, 204)";
-const backgroundColor = "white";
 
 interface TodoItemProps {
     freshTasksList?: (item: Task) => void;
@@ -27,9 +31,9 @@ export default class TodoItem extends React.Component<TodoItemProps, {}> {
     calculateDateText(): string {
         const expireTime = this.props.item.ExpireTime;
         switch (this.props.description) {
-            case "已逾期": return DayDict[expireTime.getDay()] + "  截止";
+            case "已逾期": return expireTime.toDateString() + "  过期";
             case "未来七天": return DayDict[expireTime.getDay()] + "  截止";
-            case "以后": return expireTime.getMonth() + "月" + expireTime.getDate() + "日" + "  截止";
+            case "以后": return expireTime.toDateString() + "  截止";
         }
         return "";
     }

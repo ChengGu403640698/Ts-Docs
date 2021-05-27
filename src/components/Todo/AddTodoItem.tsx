@@ -1,5 +1,10 @@
+// AddTodoItem -- 页面组件 -- '/addItem'
+
+// 页面结构:
+// HEADER--组件: 已处理的
+// 添加内容
+
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import Header from './Header'
 import personIcon from './icons/person.png'
 import clockIcon from './icons/alarm.png'
@@ -18,9 +23,16 @@ interface AddTodoItemProps {
 const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
     const [expire, setExpire] = useState(new Date())
     const [title, setTitle] = useState("")
+    const [memo, setMemo] = useState("")
+    const [attachedFiles,setAttachedFiles] = useState([])
+    const [otherParticipants,setOtherParticipants]=useState([person])
+    const [showRest, setShowRest] = useState(false)
     const checkAllDone = () => {
         if (!title) return false;
         return true;
+    }
+    const handleAddMemo = (event:any)=>{
+        setMemo(event.target.value);
     }
     return (<>
         <div className="relative-position">
@@ -29,7 +41,7 @@ const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
                 title="添加待办"
                 id="gotoMain" />
             <button
-                className="absolute-position button-styleok"
+                className="absolute-position button-style"
                 style={{
                     top: "20px",
                     right: "20px"
@@ -42,8 +54,10 @@ const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
                             Title: title,
                             Person: person,
                             ExpireTime: expire,
+                            Memo:memo,
+                            AttachedFiles:attachedFiles,
+                            OtherParticipants:otherParticipants,
                         }))
-                        console.dir(document.getElementById("gotoMain"))
                         document.getElementById("gotoMain")!.click();
                     }
                 }}>完成</button>
@@ -72,8 +86,6 @@ const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
                 src={clockIcon}
                 alt="clockIcon"
                 className="icon " />
-            <input type="text" value={expire.toLocaleString()}
-                disabled />
             <DatePicker
                 showTime={true}
                 format="yyyy-MM-dd HH:mm"
@@ -81,6 +93,27 @@ const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
                     setExpire(moment.toDate())
                 }} />
         </div>
+        <div>
+        {showRest?
+        (<>
+        <div className="bar-area">
+            <input type="text" placeholder="添加备注" onBlur={handleAddMemo}/>
+        </div>
+        <div className="bar-area">
+            附件
+        </div>
+        {/* 不知如何上传附件 */}
+        <div className="bar-area">
+            参与人： {otherParticipants.length}人
+        </div></>):
+        <div className="bar-area">
+            <span  style={{
+            color: "lightBlue"
+        }}
+        onClick={()=>{setShowRest(true)}}>显示全部</span>
+        </div>}
+        </div>
+        
     </>)
 }
 export default AddTodoItem;

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { Task } from './components/Todo/types'
 import { person, produceData } from './components/Todo/global'
-import { TodoComponent as Todo, FinishedTodo, EditTodoItem, AddTodoItem } from './components/Todo'
+import { TodoComponent as Todo, FinishedItemList, EditTodoItem, AddTodoItem } from './components/Todo'
 
 const App: React.FC<{}> = () => {
 
@@ -33,7 +33,7 @@ const App: React.FC<{}> = () => {
             </Route>
             <Route
                 path="/VisitFinished"
-                render={() => <FinishedTodo TasksList={data} />}>
+                render={() => <FinishedItemList TasksList={data} />}>
             </Route>
             <Route
                 path="/editItem"
@@ -59,3 +59,5 @@ const App: React.FC<{}> = () => {
     )
 }
 export default App;
+
+// add 和 edit 都应该修改ok

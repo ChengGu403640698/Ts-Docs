@@ -12,7 +12,7 @@ export interface Task {
     ifFinished?: boolean,
     Memo?: string,
     AttachedFiles?: Array<File>;
-    OtherParticipants?: Array<string>;
+    OtherParticipants?: Array<PersonInfo>;
     EmergyLeval?: EmergyLeval;
 }
 export class RealTask {
@@ -22,7 +22,7 @@ export class RealTask {
     ifFinished: boolean = false;
     Memo: string = ""
     AttachedFiles: Array<File> = []
-    OtherParticipants: Array<string> = []
+    OtherParticipants: Array<PersonInfo> = []
     EmergyLeval: EmergyLeval = "Low"
     constructor(param: Task) {
         this.Title = param.Title;
@@ -38,7 +38,7 @@ export class RealTask {
 export type TimerType = ReturnType<typeof setInterval>;
 
 export enum DayDict {
-    "星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"
+    "星期一" = 1, "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"
 }
 export type TodoItemStatusType = "已逾期" | "未来七天" | "以后" | "已完成";
 

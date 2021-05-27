@@ -1,3 +1,9 @@
+// TodoItemList -- 元素组件 -- 首页的一部分
+
+// 结构如下：
+// 标题: "已逾期"| "未来七天"| "以后"
+// TodoItem 列表
+
 import React from 'react'
 import { Task, TodoItemStatusType } from './types'
 import TodoItem from './TodoItem'
@@ -10,11 +16,16 @@ interface TodoItemListProps {
     description: TodoItemStatusType,
     list: Task[],
 }
+interface TodoItemListState{
+    ifshowList: boolean;
+    Icon:typeof rightIcon;
+}
 
-
-export default class TodoItemList extends React.Component<TodoItemListProps, {}> {
-    ifshowList: boolean = false;
-    Icon = rightIcon;
+export default class TodoItemList extends React.Component<TodoItemListProps, TodoItemListState> {
+    state:TodoItemListState = {
+        ifshowList:  false,
+        Icon : rightIcon,
+    }
 
     constructor(props: TodoItemListProps) {
         super(props);
@@ -24,8 +35,10 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
     }
 
     handleClickHide() {
-        this.Icon = this.Icon == downIcon ? rightIcon : downIcon;
-        this.ifshowList = !this.ifshowList;
+        this.setState({
+            Icon: this.state.Icon == downIcon ? rightIcon : downIcon,
+            ifshowList: !this.state.ifshowList,
+        })
     }
     freshTasksList(item: Task): void {
         this.props.freshTasksList(item);
@@ -33,11 +46,11 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
     render() {
         return (<div className="todo-item-list">
             <div onClick={this.handleClickHide.bind(this)}>
-                <img className="icon" src={this.Icon} alt="down" />
+                <img className="icon" src={this.state.Icon} alt="down" />
                 <b>{this.props.description}</b>
             </div>
             {/* 要渲染的列表 */}
-            <div className={this.ifshowList ? "show" : "hide"}>
+            <div className={this.state.ifshowList ? "show" : "hide"}>
                 {
                     this.props.list.map((item) => {
                         return <TodoItem
@@ -53,3 +66,4 @@ export default class TodoItemList extends React.Component<TodoItemListProps, {}>
     }
 }
 //注意渲染列表中此时的key不是很合适
+// 这里暂时没处理今天明天的时间显示逻辑

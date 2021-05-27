@@ -1,3 +1,9 @@
+// FinishedItemList -- 页面组件 -- '/VisitFinished'
+
+// 页面结构:
+// HEADER--组件: 已处理的
+// TodoItem 列表
+
 import React from 'react'
 import Header from './Header'
 import TodoItem from './TodoItem'

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve --open --host 10.192.47.104",
+    "start": "webpack serve --open --host 192.168.1.44",
     "build": "webpack --mode production"
   },
   "keywords": [],
