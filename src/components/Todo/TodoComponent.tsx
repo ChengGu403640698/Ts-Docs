@@ -7,100 +7,116 @@
 // TodoItemList--组件: >以后
 
 import React from 'react'
-import TodoItemList from './TodoItemList'
-import { Task, TimerType } from './types'
-import { DayLength } from './global'
-import './styles/style.less'
 import { Link } from 'react-router-dom'
-import AddBtn from './icons/add.png'
+
+import TodoItemList from './TodoItemList'
 import Header from './Header'
+import AddBtn from './icons/add.png'
+
+import { Task, TimerType } from './types'
+import { DayLength } from './utils'
+import './styles/style.less'
+
 
 interface TodoComponentProps {
-    freshTasksList: (item: Task) => void,
     TasksList: Task[];
+    makeItemFinished: (item: Task) => void,
 }
 interface TodoStates {
-    TasksList: Task[];
+    TodoTasksList: Task[];
     currentTime: number;
+    expireTasks: Task[];
+    in7daysTasks: Task[];
+    futureComingTasks: Task[];
 }
 
 class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
 
     timer: TimerType | null = null;
     state: TodoStates = {
-        TasksList: [],
+        TodoTasksList: [],
+        expireTasks: [],
+        in7daysTasks: [],
+        futureComingTasks: [],
         currentTime: Date.now(),
+    }
+
+    private getExpireTasks(): Task[] {
+        const currentTime = this.state.currentTime;
+        return this.state.TodoTasksList.filter((item) => {
+            return item.ExpireTime.getTime() < currentTime;
+        })
+    }
+
+
+    private getIn7DaysTasks(): Task[] {
+        const currentTime = this.state.currentTime;
+        return this.state.TodoTasksList.filter((item) => {
+            return item.ExpireTime.getTime() <= (currentTime + 7 * DayLength)
+                && item.ExpireTime.getTime() >= currentTime;
+        })
+    }
+
+    private getFutureComingTasks(): Task[] {
+        const currentTime = this.state.currentTime;
+        return this.state.TodoTasksList.filter((item) => {
+            return item.ExpireTime.getTime() > (currentTime + 7 * DayLength);
+        })
+    }
+
+    makeItemFinished(item: Task): void {
+        this.props.makeItemFinished(item);
     }
 
     componentDidMount() {
         this.setState({
-            currentTime: Date.now()
-        })
-        this.setState({
-            TasksList: this.props.TasksList.filter((item) => {
+            TodoTasksList: this.props.TasksList.filter((item) => {
                 return !item.ifFinished;
             })
         })
+
         this.timer = setInterval(() => {
             this.setState({
                 currentTime: Date.now()
             })
-        }, 1000);
+        }, 1000 * 60);
+        // 暂时设置成1分钟更新一个状态
+    }
+
+    componentWillReceiveProps() {
+        this.setState(
+            {
+                expireTasks: this.getExpireTasks(),
+                in7daysTasks: this.getIn7DaysTasks(),
+                futureComingTasks: this.getFutureComingTasks(),
+            }
+        )
     }
 
     componentWillUnmount() {
         clearInterval(this.timer!);
     }
 
-    private getExpireTasks(): Task[] {
-        const currentTime = this.state.currentTime;
-        return this.state.TasksList.filter((item) => {
-            return item.ExpireTime.getTime() < currentTime;
-        })
-    }
-
-    
-    private getIn7DaysTasks(): Task[] {
-        const currentTime = this.state.currentTime;
-        return this.state.TasksList.filter((item) => {
-            return item.ExpireTime.getTime() <= (currentTime + 7 * DayLength)
-                && item.ExpireTime.getTime() >= currentTime;
-        })
-    }
-
-    private getFutureComingTask(): Task[] {
-        const currentTime = this.state.currentTime;
-        return this.state.TasksList.filter((item) => {
-            return item.ExpireTime.getTime() > (currentTime + 7 * DayLength);
-        })
-    }
-
-    freshTasksList(item: Task): void {
-        this.props.freshTasksList(item);
-    }
-
     render() {
         return (<>
-            <Header targetPath="/" title="待办" ></Header>
+            <Header targetPath="/" title="待办" />
             <TodoItemList
                 description={"已逾期"}
                 list={this.getExpireTasks()}
-                freshTasksList={this.freshTasksList.bind(this)}
+                makeItemFinished={this.makeItemFinished.bind(this)}
             />
             <TodoItemList
                 description={"未来七天"}
                 list={this.getIn7DaysTasks()}
-                freshTasksList={this.freshTasksList.bind(this)}
+                makeItemFinished={this.makeItemFinished.bind(this)}
             />
             <TodoItemList
                 description={"以后"}
-                list={this.getFutureComingTask()}
-                freshTasksList={this.freshTasksList.bind(this)}
+                list={this.getFutureComingTasks()}
+                makeItemFinished={this.makeItemFinished.bind(this)}
             />
             <div className="inline-center">
-                <Link to="/VisitFinished" >
-                    {"已处理的待办 >"}
-                </Link>
+                <Link to="/VisitFinished" >{"已处理的待办 >"}</Link>
             </div>
             <Link to="/addItem">
                 <img className="add-btnicon" src={AddBtn} alt="Add TodoItem" />
@@ -111,3 +127,5 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
 }
 
 export default TodoComponent
+
+// 不知道为什么会出现状态消失的问题？？？？

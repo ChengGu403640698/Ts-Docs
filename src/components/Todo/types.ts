@@ -1,11 +1,13 @@
-export type anyobj = Record<string, any>;
 export interface PersonInfo {
     Name: string,
     Id: string,
     [props: string]: any,
 }
+
 export type EmergyLeval = 'Low' | "Normal" | "Urgent" | 'ExtremeUrgent';
+
 export interface Task {
+    Id: string,
     Title: string,
     Person: PersonInfo,
     ExpireTime: Date,
@@ -15,7 +17,9 @@ export interface Task {
     OtherParticipants?: Array<PersonInfo>;
     EmergyLeval?: EmergyLeval;
 }
+
 export class RealTask {
+    Id: string = (Math.random() * 1000000).toString();
     Title: string = "";
     Person: PersonInfo
     ExpireTime: Date
@@ -40,6 +44,5 @@ export type TimerType = ReturnType<typeof setInterval>;
 export enum DayDict {
     "星期一" = 1, "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"
 }
-export type TodoItemStatusType = "已逾期" | "未来七天" | "以后" | "已完成";
 
-export const DayLength: number = 60 * 24 * 60 * 1000;
+export type TodoItemStatusType = "已逾期" | "未来七天" | "以后" | "已完成";
