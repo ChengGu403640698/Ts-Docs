@@ -113,7 +113,6 @@ const AddTodoItem: React.FC<AddTodoItemProps> = ({ person, handleAddItem }) => {
                 </div>)
             }
         </div>
-
     </>)
 }
 

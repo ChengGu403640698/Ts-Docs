@@ -25,9 +25,6 @@ interface TodoComponentProps {
 interface TodoStates {
     TodoTasksList: Task[];
     currentTime: number;
-    expireTasks: Task[];
-    in7daysTasks: Task[];
-    futureComingTasks: Task[];
 }
 
 class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
@@ -35,9 +32,6 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
     timer: TimerType | null = null;
     state: TodoStates = {
         TodoTasksList: [],
-        expireTasks: [],
-        in7daysTasks: [],
-        futureComingTasks: [],
         currentTime: Date.now(),
     }
 
@@ -83,16 +77,6 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
         // 暂时设置成1分钟更新一个状态
     }
 
-    componentWillReceiveProps() {
-        this.setState(
-            {
-                expireTasks: this.getExpireTasks(),
-                in7daysTasks: this.getIn7DaysTasks(),
-                futureComingTasks: this.getFutureComingTasks(),
-            }
-        )
-    }
-
     componentWillUnmount() {
         clearInterval(this.timer!);
     }
@@ -127,5 +111,3 @@ class TodoComponent extends React.Component<TodoComponentProps, TodoStates> {
 }
 
 export default TodoComponent
-
-// 不知道为什么会出现状态消失的问题？？？？
